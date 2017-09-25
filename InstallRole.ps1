@@ -1,3 +1,4 @@
+# Instala uma Função/Recurso do Windows Server, recebendo o nome da Função/Recurso como parâmetro
 Param
  (
     $Role
