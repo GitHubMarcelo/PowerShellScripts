@@ -1,19 +1,19 @@
 ﻿configuration IISConfig
 {
-	# Importa os módulos necessários
+    # Importa os módulos necessários
     Import-DscResource –Module xWebAdministration
-	Import-DscResource -ModuleName PsDesiredStateConfiguration
+    Import-DscResource -ModuleName PsDesiredStateConfiguration
 	
     node "localhost"
      {
         # Instala o IIS com os componentes padrão
-		WindowsFeature IIS
+	WindowsFeature IIS
         {
             Ensure = "Present"
             Name = "Web-Server"
         }
 		
-		# Instala o console de Gerenciamento do IIS
+	# Instala o console de Gerenciamento do IIS
         WindowsFeature MgmtConsole
         {
             Ensure = "Present"
@@ -22,7 +22,7 @@
         }
 
         # Cria a pasta do site que será criado
-		File SitePhysicalFolder
+	File SitePhysicalFolder
         {
             Ensure = "Present"
             Type = "Directory"            
@@ -31,7 +31,7 @@
         }
 	
         # Cria a home page do site
-		File HomePage
+	File HomePage
         {
             Ensure = "Present"
             Type = "File"
@@ -42,7 +42,7 @@
         }
             
         # Remove o  site padrão do IIS
-		xWebsite DefaultWebSite
+	xWebsite DefaultWebSite
         {
             Ensure = "Absent"
             Name = "Default Web Site"            
@@ -50,8 +50,8 @@
             DependsOn = "[WindowsFeature]IIS"
         }
         
-		# Cria um novo site do IIS
-		xWebsite NewWebSite
+	# Cria um novo site do IIS
+	xWebsite NewWebSite
         {
             Ensure = "Present"
             Name = "Web Site 1"            
